@@ -1,15 +1,15 @@
 #global preversion .pre4
 
 Name:		libva-vdpau-driver
-Version:	0.7.3
-Release:	2%{?preversion}%{?dist}
+Version:	0.7.4
+Release:	1%{?preversion}%{?dist}
 Summary:	HW video decode support for VDPAU platforms
 Group:		System Environment/Libraries
 License:	GPLv2+
-URL:		http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/
-Source0:	http://cgit.freedesktop.org/vaapi/vdpau-driver/snapshot/vdpau-driver-%{version}%{?preversion}.tar.bz2
+URL:		http://cgit.freedesktop.org/vaapi/vdpau-driver
+Source0:        http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}%{?preversion}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	libtool
+#BuildRequires:	libtool
 BuildRequires:	libva-devel
 BuildRequires:	libvdpau-devel
 BuildRequires:	mesa-libGL-devel
@@ -23,8 +23,7 @@ HW video decode support for VDPAU platforms.
 
 
 %prep
-%setup -q -n vdpau-driver-%{version}%{?preversion}
-autoreconf -vif
+%setup -q -n %{name}-%{version}%{?preversion}
 
 %build
 %configure --enable-glx
@@ -44,6 +43,9 @@ rm -rf %{buildroot}
 %{_libdir}/dri/*.so
 
 %changelog
+* Sun Oct 07 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.7.4-1
+- Update to 0.7.4
+
 * Mon Jan 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-2
 - Rename to libva-vdpau-driver
 
