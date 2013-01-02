@@ -7,7 +7,7 @@ Summary:	HW video decode support for VDPAU platforms
 Group:		System Environment/Libraries
 License:	GPLv2+
 URL:		http://cgit.freedesktop.org/vaapi/vdpau-driver
-Source0:        http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}%{?preversion}.tar.bz2
+Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}%{?preversion}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 #BuildRequires:	libtool
 BuildRequires:	libva-devel
