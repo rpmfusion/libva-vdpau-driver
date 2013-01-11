@@ -2,12 +2,13 @@
 
 Name:		libva-vdpau-driver
 Version:	0.7.4
-Release:	1%{?preversion}%{?dist}
+Release:	2%{?preversion}%{?dist}
 Summary:	HW video decode support for VDPAU platforms
 Group:		System Environment/Libraries
 License:	GPLv2+
 URL:		http://cgit.freedesktop.org/vaapi/vdpau-driver
 Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}%{?preversion}.tar.bz2
+Patch0:         0001-Fix-libva-vdpau-driver-with-GL_GLEXT_VERSION-85.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 #BuildRequires:	libtool
 BuildRequires:	libva-devel
@@ -24,6 +25,7 @@ HW video decode support for VDPAU platforms.
 
 %prep
 %setup -q -n %{name}-%{version}%{?preversion}
+%patch0 -p1
 
 %build
 %configure --enable-glx
@@ -43,6 +45,9 @@ rm -rf %{buildroot}
 %{_libdir}/dri/*.so
 
 %changelog
+* Fri Jan 11 2013 Nicolas Chauvet <kwizart@gmail.com> - 0.7.4-2
+- Fix build with recent mesa
+
 * Sun Oct 07 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.7.4-1
 - Update to 0.7.4
 
