@@ -2,14 +2,14 @@
 
 Name:		libva-vdpau-driver
 Version:	0.7.4
-Release:	2%{?preversion}%{?dist}
+Release:	3%{?preversion}%{?dist}
 Summary:	HW video decode support for VDPAU platforms
 Group:		System Environment/Libraries
 License:	GPLv2+
 URL:		http://cgit.freedesktop.org/vaapi/vdpau-driver
 Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}%{?preversion}.tar.bz2
 Patch0:         0001-Fix-libva-vdpau-driver-with-GL_GLEXT_VERSION-85.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 #BuildRequires:	libtool
 BuildRequires:	libva-devel
 BuildRequires:	libvdpau-devel
@@ -28,23 +28,26 @@ HW video decode support for VDPAU platforms.
 %patch0 -p1
 
 %build
-%configure --enable-glx
+%configure \
+  --disable-silent-rules \
+  --enable-glx
+
 make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
 %{_libdir}/dri/*.so
 
 %changelog
+* Mon Feb 18 2013 Nicolas Chauvet <kwizart@gmail.com> - 0.7.4-3
+- Add --disable-silent-rules
+- Clean-up spec
+
 * Fri Jan 11 2013 Nicolas Chauvet <kwizart@gmail.com> - 0.7.4-2
 - Fix build with recent mesa
 
